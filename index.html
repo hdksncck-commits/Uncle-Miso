@@ -117,6 +117,7 @@
         .logo-img img {
             max-width: 100%;
             height: auto;
+            border-radius: 50%;
         }
         
         .logo-text h1 {
@@ -752,8 +753,8 @@
                 </div>
                 <div class="social-header">
                     <a href="https://www.facebook.com/unclemiso1" target="_blank"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="https://youtube.com/@unclemiso?si=57cEKtSW8cE5roNJ" target="_blank"><i class="fab fa-youtube"></i></a>
+                    <a href="https://www.tiktok.com/@uncle.miso?_r=1&_t=ZS-93BMUjsXYYM" target="_blank"><i class="fab fa-tiktok"></i></a>
                 </div>
             </div>
         </div>
@@ -761,7 +762,8 @@
         <div class="container header-main">
             <div class="logo-container">
                 <div class="logo-img">
-                    <img src="https://via.placeholder.com/70x70/2C3E50/ffffff?text=TBU" alt="شعار جامعة تعالى بالليل">
+                    <!-- ضع صورتك هنا (1.jpg) -->
+                    <img src="1.jpg" alt="شعار جامعة تعالى بالليل">
                 </div>
                 <div class="logo-text">
                     <h1>جامعة تعالى بالليل</h1>
@@ -809,7 +811,8 @@
             <div class="president-card">
                 <div class="president-image">
                     <div class="president-badge">الرئيس</div>
-                    <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="الدكتور ميسو">
+                    <!-- ضع صورة الدكتور ميسو هنا (3.jpg) -->
+                    <img src="3.jpg" alt="الدكتور ميسو">
                 </div>
                 
                 <div class="president-info">
@@ -825,8 +828,11 @@
                         <a href="https://www.facebook.com/unclemiso1" class="social-icon" target="_blank" title="فيسبوك">
                             <i class="fab fa-facebook-f"></i>
                         </a>
-                        <a href="https://instagram.com/uncle.miso" class="social-icon" target="_blank" title="انستجرام">
-                            <i class="fab fa-instagram"></i>
+                        <a href="https://youtube.com/@unclemiso?si=57cEKtSW8cE5roNJ" class="social-icon" target="_blank" title="يوتيوب">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                        <a href="https://www.tiktok.com/@uncle.miso?_r=1&_t=ZS-93BMUjsXYYM" class="social-icon" target="_blank" title="تيك توك">
+                            <i class="fab fa-tiktok"></i>
                         </a>
                         <a href="mailto:president@taala-blel.edu" class="social-icon" title="البريد الإلكتروني">
                             <i class="fas fa-envelope"></i>
@@ -913,17 +919,20 @@
             
             <div class="gallery-grid">
                 <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="gallery-img" alt="جمال عادل">
+                    <!-- ضع صورة جمال عادل هنا (1.jpg) -->
+                    <img src="1.jpg" class="gallery-img" alt="جمال عادل">
                     <div class="gallery-caption">جمال عادل - رئيس قسم التعليم</div>
                 </div>
                 
                 <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1562774053-701939374585?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="gallery-img" alt="المدخل الرئيسي">
+                    <!-- ضع صورة المدخل الرئيسي هنا (2.jpg) -->
+                    <img src="2.jpg" class="gallery-img" alt="المدخل الرئيسي">
                     <div class="gallery-caption">المدخل الرئيسي للجامعة</div>
                 </div>
                 
                 <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="gallery-img" alt="الدكتور ميسو">
+                    <!-- ضع صورة الدكتور ميسو هنا (3.jpg) -->
+                    <img src="3.jpg" class="gallery-img" alt="الدكتور ميسو">
                     <div class="gallery-caption">الدكتور ميسو - رئيس الجامعة</div>
                 </div>
             </div>
@@ -1036,14 +1045,6 @@
             setTimeout(() => {
                 window.dispatchEvent(new Event('scroll'));
             }, 300);
-            
-            // إضافة تأثير للشعار
-            const logoText = document.querySelector('.logo-text h1');
-            setInterval(() => {
-                logoText.style.background = `linear-gradient(to right, ${Math.random() > 0.5 ? '#F1C40F' : '#E74C3C'}, #fff)`;
-                logoText.style.webkitBackgroundClip = 'text';
-                logoText.style.webkitTextFillColor = 'transparent';
-            }, 3000);
         });
     </script>
 </body>
