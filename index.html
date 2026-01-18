@@ -5,95 +5,174 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>جامعة تعالى بالليل | Taala Blel University</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@300;400;500;600;700;800&family=Rubik:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         /* الأساسيات */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         
         :root {
-            --primary-color: #1a237e;
-            --secondary-color: #ff9800;
-            --accent-color: #4caf50;
-            --light-color: #f5f5f5;
-            --dark-color: #333;
-            --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --primary: #2C3E50;
+            --secondary: #E74C3C;
+            --accent: #3498DB;
+            --light: #F9F9F9;
+            --dark: #1A252F;
+            --gold: #F1C40F;
+            --gray: #7F8C8D;
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            --shadow-hover: 0 20px 40px rgba(0, 0, 0, 0.12);
         }
         
         body {
-            background-color: #f9f9f9;
-            color: var(--dark-color);
-            line-height: 1.6;
+            font-family: 'Noto Sans Arabic', sans-serif;
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.8;
+            overflow-x: hidden;
         }
         
         .container {
             width: 100%;
-            max-width: 1200px;
+            max-width: 1300px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 25px;
         }
         
-        /* الهيدر */
+        /* الهيدر المميز */
         header {
-            background: linear-gradient(135deg, var(--primary-color), #283593);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--dark) 100%);
             color: white;
-            padding: 15px 0;
-            box-shadow: var(--shadow);
+            padding: 0;
             position: sticky;
             top: 0;
             z-index: 1000;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
         }
         
-        .header-content {
+        .header-top {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .header-top-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9rem;
+        }
+        
+        .header-contact {
+            display: flex;
+            gap: 25px;
+        }
+        
+        .header-contact span {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        .social-header a {
+            color: rgba(255, 255, 255, 0.8);
+            margin-left: 15px;
+            transition: var(--transition);
+        }
+        
+        .social-header a:hover {
+            color: var(--gold);
+        }
+        
+        .header-main {
+            padding: 20px 0;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
         
-        .logo {
+        .logo-container {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 20px;
         }
         
-        .logo img {
-            height: 70px;
-            border-radius: 10px;
-            border: 3px solid var(--secondary-color);
+        .logo-img {
+            width: 90px;
+            height: 90px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 15px;
+            box-shadow: var(--shadow);
+            border: 3px solid var(--gold);
+        }
+        
+        .logo-img img {
+            max-width: 100%;
+            height: auto;
         }
         
         .logo-text h1 {
-            font-size: 1.8rem;
+            font-size: 2.2rem;
+            font-weight: 800;
             margin-bottom: 5px;
+            background: linear-gradient(to right, var(--gold), #fff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.5px;
         }
         
         .logo-text p {
-            color: #ddd;
-            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1.1rem;
+            font-weight: 300;
         }
         
+        /* القائمة الحديثة */
         nav ul {
             display: flex;
             list-style: none;
-            gap: 25px;
+            gap: 10px;
         }
         
         nav a {
             color: white;
             text-decoration: none;
             font-weight: 600;
-            font-size: 1.1rem;
-            transition: color 0.3s;
-            padding: 5px 10px;
-            border-radius: 5px;
+            font-size: 1.05rem;
+            padding: 12px 22px;
+            border-radius: 8px;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        nav a:before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 0;
+            height: 3px;
+            background: var(--gold);
+            transition: var(--transition);
+        }
+        
+        nav a:hover:before {
+            width: 100%;
+            right: auto;
+            left: 0;
         }
         
         nav a:hover {
-            color: var(--secondary-color);
-            background-color: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.05);
         }
         
         .mobile-menu-btn {
@@ -101,300 +180,496 @@
             background: none;
             border: none;
             color: white;
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             cursor: pointer;
         }
         
-        /* البانر الرئيسي */
+        /* البانر البطولي */
         .hero {
-            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
+            background: linear-gradient(rgba(26, 37, 47, 0.85), rgba(26, 37, 47, 0.9)), 
+                        url('https://images.unsplash.com/photo-1562774053-701939374585?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80');
             background-size: cover;
             background-position: center;
+            background-attachment: fixed;
             color: white;
             text-align: center;
-            padding: 100px 20px;
-            margin-bottom: 50px;
+            padding: 150px 20px;
+            margin-bottom: 80px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero:after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 150px;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'%3E%3Cpath d='M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z' fill='%23f9f9f9'%3E%3C/path%3E%3C/svg%3E");
+            background-size: cover;
+        }
+        
+        .hero-content {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
         }
         
         .hero h2 {
-            font-size: 2.8rem;
-            margin-bottom: 20px;
-            color: var(--secondary-color);
+            font-size: 3.5rem;
+            margin-bottom: 25px;
+            font-weight: 800;
+            line-height: 1.2;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        .hero h2 span {
+            color: var(--gold);
+            position: relative;
+        }
+        
+        .hero h2 span:after {
+            content: '';
+            position: absolute;
+            bottom: 5px;
+            right: 0;
+            width: 100%;
+            height: 8px;
+            background: rgba(241, 196, 15, 0.2);
+            z-index: -1;
         }
         
         .hero p {
             font-size: 1.3rem;
+            margin-bottom: 40px;
+            color: rgba(255, 255, 255, 0.9);
             max-width: 800px;
-            margin: 0 auto 30px;
+            margin: 0 auto 50px;
+            line-height: 1.8;
         }
         
         .cta-button {
-            display: inline-block;
-            background-color: var(--secondary-color);
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: linear-gradient(135deg, var(--secondary), #C0392B);
             color: white;
-            padding: 15px 35px;
+            padding: 18px 40px;
             font-size: 1.2rem;
-            font-weight: bold;
+            font-weight: 700;
             text-decoration: none;
-            border-radius: 50px;
-            transition: all 0.3s;
-            border: 2px solid var(--secondary-color);
+            border-radius: 12px;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 10px 20px rgba(231, 76, 60, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-button:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+        }
+        
+        .cta-button:hover:after {
+            left: 100%;
         }
         
         .cta-button:hover {
-            background-color: transparent;
-            color: var(--secondary-color);
-            transform: translateY(-3px);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(231, 76, 60, 0.4);
         }
         
-        /* قسم الرئاسة */
-        .presidency {
-            padding: 60px 0;
-            background-color: white;
-            margin-bottom: 50px;
-            box-shadow: var(--shadow);
+        /* قسم الرئيس */
+        .president-section {
+            padding: 100px 0;
+            background: white;
+            position: relative;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 70px;
         }
         
         .section-title {
-            text-align: center;
-            color: var(--primary-color);
-            margin-bottom: 40px;
-            font-size: 2.2rem;
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 20px;
             position: relative;
+            display: inline-block;
         }
         
         .section-title:after {
             content: '';
             position: absolute;
-            width: 100px;
-            height: 4px;
-            background-color: var(--secondary-color);
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
+            bottom: -15px;
+            right: 0;
+            width: 80px;
+            height: 5px;
+            background: var(--secondary);
+            border-radius: 5px;
         }
         
-        .presidency-content {
-            display: flex;
-            align-items: center;
-            gap: 40px;
-            flex-wrap: wrap;
-            justify-content: center;
+        .section-subtitle {
+            color: var(--gray);
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
         }
         
         .president-card {
-            flex: 1;
-            min-width: 300px;
-            text-align: center;
-            padding: 25px;
-            background: white;
-            border-radius: 15px;
-            box-shadow: var(--shadow);
-            border-top: 5px solid var(--primary-color);
-        }
-        
-        .president-card img {
-            width: 220px;
-            height: 220px;
-            object-fit: cover;
-            border-radius: 50%;
-            border: 5px solid var(--secondary-color);
-            margin-bottom: 20px;
-        }
-        
-        .president-card h3 {
-            color: var(--primary-color);
-            margin-bottom: 10px;
-            font-size: 1.8rem;
-        }
-        
-        .president-card .title {
-            color: var(--secondary-color);
-            font-weight: bold;
-            margin-bottom: 15px;
-            font-size: 1.2rem;
-        }
-        
-        .president-card .id {
-            background-color: var(--light-color);
-            padding: 8px 15px;
-            border-radius: 5px;
-            display: inline-block;
-            margin-bottom: 15px;
-            font-family: monospace;
-        }
-        
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-top: 20px;
-        }
-        
-        .social-links a {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            background-color: var(--primary-color);
-            color: white;
-            border-radius: 50%;
-            text-decoration: none;
-            transition: all 0.3s;
-        }
-        
-        .social-links a:hover {
-            background-color: var(--secondary-color);
-            transform: translateY(-3px);
-        }
-        
-        /* معلومات الجامعة */
-        .university-info {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-bottom: 50px;
-        }
-        
-        .info-card {
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
             background: white;
-            padding: 30px;
-            border-radius: 15px;
+            border-radius: 20px;
             box-shadow: var(--shadow);
-            text-align: center;
-            transition: transform 0.3s;
-            border-top: 5px solid var(--accent-color);
+            overflow: hidden;
+            padding: 0;
+            transition: var(--transition);
+            margin-bottom: 80px;
         }
         
-        .info-card:hover {
+        .president-card:hover {
+            box-shadow: var(--shadow-hover);
             transform: translateY(-10px);
         }
         
-        .info-card i {
-            font-size: 3rem;
-            color: var(--primary-color);
-            margin-bottom: 20px;
+        .president-image {
+            position: relative;
+            overflow: hidden;
         }
         
-        .info-card h3 {
-            color: var(--primary-color);
-            margin-bottom: 15px;
+        .president-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+        
+        .president-card:hover .president-image img {
+            transform: scale(1.05);
+        }
+        
+        .president-badge {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            background: var(--secondary);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-weight: 700;
+            box-shadow: 0 5px 15px rgba(231, 76, 60, 0.3);
+        }
+        
+        .president-info {
+            padding: 50px 40px 50px 0;
+        }
+        
+        .president-name {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+        
+        .president-title {
             font-size: 1.5rem;
+            color: var(--secondary);
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+        
+        .president-id {
+            display: inline-block;
+            background: var(--light);
+            padding: 12px 25px;
+            border-radius: 10px;
+            font-family: 'Courier New', monospace;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 30px;
+            border-right: 5px solid var(--accent);
+        }
+        
+        .president-bio {
+            color: var(--gray);
+            font-size: 1.1rem;
+            margin-bottom: 35px;
+            line-height: 1.9;
+        }
+        
+        .president-social {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            background: var(--light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 1.3rem;
+            transition: var(--transition);
+            text-decoration: none;
+        }
+        
+        .social-icon:hover {
+            background: var(--secondary);
+            color: white;
+            transform: translateY(-5px);
+        }
+        
+        /* فريق القيادة */
+        .leadership-team {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .team-member {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border-top: 5px solid var(--accent);
+        }
+        
+        .team-member:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
+        }
+        
+        .team-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--accent), #2980B9);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+        }
+        
+        .team-member h4 {
+            font-size: 1.4rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        .team-member p {
+            color: var(--gray);
+            font-size: 1rem;
+        }
+        
+        /* ميزات الجامعة */
+        .features {
+            padding: 100px 0;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 40px;
+        }
+        
+        .feature-card {
+            background: white;
+            border-radius: 15px;
+            padding: 40px 30px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-15px);
+            box-shadow: var(--shadow-hover);
+        }
+        
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary), var(--dark));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2.2rem;
+            margin: 0 auto 25px;
+        }
+        
+        .feature-card h3 {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        /* معرض الصور */
+        .gallery-section {
+            padding: 100px 0;
+            background: white;
+        }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+        
+        .gallery-item {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+        }
+        
+        .gallery-item:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
+        }
+        
+        .gallery-img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+        
+        .gallery-item:hover .gallery-img {
+            transform: scale(1.1);
+        }
+        
+        .gallery-caption {
+            background: white;
+            padding: 20px;
+            text-align: center;
+            font-weight: 700;
+            color: var(--primary);
+            border-top: 1px solid #eee;
         }
         
         /* الفوتر */
         footer {
-            background-color: var(--primary-color);
+            background: linear-gradient(135deg, var(--dark) 0%, #0D1B2A 100%);
             color: white;
-            padding: 50px 0 20px;
-            margin-top: 60px;
+            padding: 80px 0 30px;
         }
         
         .footer-content {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            margin-bottom: 40px;
+            gap: 50px;
+            margin-bottom: 60px;
         }
         
-        .footer-section h3 {
-            color: var(--secondary-color);
+        .footer-logo h3 {
+            font-size: 1.8rem;
             margin-bottom: 20px;
-            font-size: 1.4rem;
+            color: var(--gold);
         }
         
-        .footer-section ul {
+        .footer-logo p {
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.8;
+        }
+        
+        .footer-links h4 {
+            font-size: 1.3rem;
+            margin-bottom: 25px;
+            color: white;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-links h4:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 40px;
+            height: 3px;
+            background: var(--gold);
+        }
+        
+        .footer-links ul {
             list-style: none;
         }
         
-        .footer-section ul li {
-            margin-bottom: 10px;
+        .footer-links li {
+            margin-bottom: 12px;
         }
         
-        .footer-section a {
-            color: #ddd;
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
             text-decoration: none;
-            transition: color 0.3s;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
         
-        .footer-section a:hover {
-            color: var(--secondary-color);
+        .footer-links a:hover {
+            color: var(--gold);
+            padding-right: 10px;
         }
         
         .copyright {
             text-align: center;
-            padding-top: 20px;
+            padding-top: 30px;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
-            color: #aaa;
+            color: rgba(255, 255, 255, 0.6);
             font-size: 0.9rem;
         }
         
-        /* قسم الصور */
-        .gallery {
-            padding: 60px 0;
-            background-color: var(--light-color);
-        }
-        
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-        }
-        
-        .gallery-item {
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: var(--shadow);
-            transition: transform 0.3s;
-        }
-        
-        .gallery-item:hover {
-            transform: scale(1.03);
-        }
-        
-        .gallery-item img {
-            width: 100%;
-            height: 250px;
-            object-fit: cover;
-            display: block;
-        }
-        
-        .gallery-caption {
-            background: white;
-            padding: 15px;
-            text-align: center;
-            font-weight: 600;
-            color: var(--primary-color);
-        }
-        
         /* التجاوب */
-        @media (max-width: 992px) {
-            .presidency-content {
-                flex-direction: column;
+        @media (max-width: 1200px) {
+            .president-card {
+                grid-template-columns: 1fr;
+                gap: 0;
             }
             
-            .hero h2 {
-                font-size: 2.2rem;
-            }
-            
-            .hero p {
-                font-size: 1.1rem;
+            .president-info {
+                padding: 40px;
             }
         }
         
-        @media (max-width: 768px) {
+        @media (max-width: 992px) {
             nav ul {
                 display: none;
                 position: absolute;
                 top: 100%;
-                left: 0;
+                right: 0;
                 width: 100%;
-                background-color: var(--primary-color);
+                background: var(--primary);
                 flex-direction: column;
                 padding: 20px;
                 text-align: center;
-                box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+                border-top: 2px solid var(--gold);
             }
             
             nav ul.active {
@@ -405,40 +680,63 @@
                 display: block;
             }
             
-            .logo img {
-                height: 60px;
-            }
-            
-            .logo-text h1 {
-                font-size: 1.5rem;
-            }
-            
-            .hero {
-                padding: 70px 20px;
-            }
-            
             .hero h2 {
-                font-size: 1.8rem;
+                font-size: 2.8rem;
+            }
+            
+            .president-name {
+                font-size: 2.2rem;
             }
         }
         
-        @media (max-width: 480px) {
-            .president-card img {
-                width: 180px;
-                height: 180px;
+        @media (max-width: 768px) {
+            .header-top {
+                display: none;
+            }
+            
+            .hero {
+                padding: 100px 20px;
             }
             
             .hero h2 {
-                font-size: 1.6rem;
+                font-size: 2.2rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
             }
             
             .section-title {
+                font-size: 2.2rem;
+            }
+            
+            .leadership-team,
+            .features-grid,
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .container {
+                padding: 0 15px;
+            }
+            
+            .logo-text h1 {
+                font-size: 1.8rem;
+            }
+            
+            .hero h2 {
                 font-size: 1.8rem;
             }
             
             .cta-button {
-                padding: 12px 25px;
+                padding: 15px 30px;
                 font-size: 1rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
             }
         }
     </style>
@@ -446,9 +744,25 @@
 <body>
     <!-- الهيدر -->
     <header>
-        <div class="container header-content">
-            <div class="logo">
-                <img src="https://via.placeholder.com/70x70/1a237e/ffffff?text=TBU" alt="شعار جامعة تعالى بالليل" id="logo-img">
+        <div class="header-top">
+            <div class="container header-top-content">
+                <div class="header-contact">
+                    <span><i class="fas fa-phone"></i> +123 456 7890</span>
+                    <span><i class="fas fa-envelope"></i> info@taala-blel.edu</span>
+                </div>
+                <div class="social-header">
+                    <a href="https://www.facebook.com/unclemiso1" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="container header-main">
+            <div class="logo-container">
+                <div class="logo-img">
+                    <img src="https://via.placeholder.com/70x70/2C3E50/ffffff?text=TBU" alt="شعار جامعة تعالى بالليل">
+                </div>
                 <div class="logo-text">
                     <h1>جامعة تعالى بالليل</h1>
                     <p>Taala Blel University</p>
@@ -463,92 +777,125 @@
                 <ul id="nav-menu">
                     <li><a href="#home">الرئيسية</a></li>
                     <li><a href="#president">رئيس الجامعة</a></li>
-                    <li><a href="#university">عن الجامعة</a></li>
-                    <li><a href="#gallery">معرض الصور</a></li>
+                    <li><a href="#team">فريق القيادة</a></li>
+                    <li><a href="#features">المميزات</a></li>
+                    <li><a href="#gallery">المعرض</a></li>
                     <li><a href="#contact">اتصل بنا</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
-    <!-- البانر الرئيسي -->
+    <!-- البانر -->
     <section class="hero" id="home">
-        <div class="container">
-            <h2>جامعة تعالى بالليل</h2>
-            <p>مرحبا بكم في المنصة الرسمية لجامعة تعالى بالليل تحت رئاسة الدكتور ميسو. جامعة رائدة في مجال التعليم الليلي، توفر بيئة تعليمية متميزة ومرنة تناسب احتياجات الطلاب.</p>
-            <a href="#president" class="cta-button">تعرف على رئيس الجامعة</a>
+        <div class="hero-content">
+            <h2>جامعة <span>تعالى بالليل</span></h2>
+            <p>مرحباً بكم في المنصة الرسمية لجامعة تعالى بالليل تحت رئاسة الدكتور ميسو. جامعة رائدة في مجال التعليم الليلي، توفر بيئة تعليمية متميزة ومرنة تناسب احتياجات الطلاب.</p>
+            <a href="#president" class="cta-button">
+                <span>تعرف على رئيس الجامعة</span>
+                <i class="fas fa-arrow-left"></i>
+            </a>
         </div>
     </section>
 
-    <!-- قسم الرئاسة -->
-    <section class="presidency" id="president">
+    <!-- رئيس الجامعة -->
+    <section class="president-section" id="president">
         <div class="container">
-            <h2 class="section-title">رئاسة الجامعة</h2>
-            <div class="presidency-content">
-                <div class="president-card">
-                    <img src="https://via.placeholder.com/220x220/1a237e/ffffff?text=Dr.Miso" alt="الدكتور ميسو" id="president-img">
-                    <h3>الدكتور ميسو</h3>
-                    <div class="title">رئيس جامعة تعالى بالليل</div>
-                    <div class="id">ID NO: 590.2 K</div>
-                    <p>قائد ورئيس جامعة تعالى بالليل، حاصل على درجة الدكتوراه في الإدارة التعليمية. يتمتع بخبرة تزيد عن 15 عاماً في مجال التعليم العالي.</p>
+            <div class="section-header">
+                <h2 class="section-title">رئاسة الجامعة</h2>
+                <p class="section-subtitle">قيادة متميزة تدفع بالجامعة نحو التميز والريادة في التعليم الليلي</p>
+            </div>
+            
+            <div class="president-card">
+                <div class="president-image">
+                    <div class="president-badge">الرئيس</div>
+                    <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="الدكتور ميسو">
+                </div>
+                
+                <div class="president-info">
+                    <h2 class="president-name">الدكتور ميسو</h2>
+                    <div class="president-title">رئيس جامعة تعالى بالليل</div>
+                    <div class="president-id">ID NO: 590.2 K</div>
                     
-                    <div class="social-links">
-                        <a href="https://www.facebook.com/unclemiso1" target="_blank" title="فيسبوك">
+                    <p class="president-bio">
+                        قائد ورئيس جامعة تعالى بالليل، حاصل على درجة الدكتوراه في الإدارة التعليمية. يتمتع بخبرة تزيد عن 15 عاماً في مجال التعليم العالي. قاد العديد من المبادرات التعليمية الناجحة وساهم في تطوير منظومة التعليم الليلي بالمنطقة.
+                    </p>
+                    
+                    <div class="president-social">
+                        <a href="https://www.facebook.com/unclemiso1" class="social-icon" target="_blank" title="فيسبوك">
                             <i class="fab fa-facebook-f"></i>
                         </a>
-                        <a href="https://instagram.com/uncle.miso" target="_blank" title="انستجرام">
+                        <a href="https://instagram.com/uncle.miso" class="social-icon" target="_blank" title="انستجرام">
                             <i class="fab fa-instagram"></i>
                         </a>
-                        <a href="mailto:president@taala-blel.edu" title="البريد الإلكتروني">
+                        <a href="mailto:president@taala-blel.edu" class="social-icon" title="البريد الإلكتروني">
                             <i class="fas fa-envelope"></i>
                         </a>
                     </div>
                 </div>
-                
-                <div class="president-info">
-                    <h3>فريق قيادة الجامعة</h3>
-                    <p>تحت رئاسة الدكتور ميسو، تعمل جامعة تعالى بالليل على تقديم تعليم متميز في الفترة المسائية لتناسب جميع الفئات.</p>
+            </div>
+            
+            <!-- فريق القيادة -->
+            <div id="team">
+                <h2 class="section-title" style="text-align: center; margin-bottom: 50px;">فريق القيادة</h2>
+                <div class="leadership-team">
+                    <div class="team-member">
+                        <div class="team-icon">
+                            <i class="fas fa-user-md"></i>
+                        </div>
+                        <h4>نائب الرئيس: الدكتور حشمت</h4>
+                        <p>يشرف على الشؤون الأكاديمية والبحث العلمي بالجامعة. حاصل على دكتوراه في الإدارة التربوية.</p>
+                    </div>
                     
-                    <div class="team-list">
-                        <div class="team-member">
-                            <h4><i class="fas fa-user-md"></i> نائب الرئيس: الدكتور حشمت</h4>
-                            <p>يشرف على الشؤون الأكاديمية والبحث العلمي بالجامعة.</p>
+                    <div class="team-member">
+                        <div class="team-icon">
+                            <i class="fas fa-user-graduate"></i>
                         </div>
-                        
-                        <div class="team-member">
-                            <h4><i class="fas fa-user-graduate"></i> عميد شؤون الطلاب: الدكتور حنان</h4>
-                            <p>مسؤول عن توفير الدعم والخدمات الطلابية في الجامعة.</p>
+                        <h4>عميد شؤون الطلاب: الدكتور حنان</h4>
+                        <p>مسؤول عن توفير الدعم والخدمات الطلابية في الجامعة. خبرة 12 عاماً في الإرشاد الطلابي.</p>
+                    </div>
+                    
+                    <div class="team-member">
+                        <div class="team-icon">
+                            <i class="fas fa-chalkboard-teacher"></i>
                         </div>
-                        
-                        <div class="team-member">
-                            <h4><i class="fas fa-chalkboard-teacher"></i> رئيس قسم التعليم: الأستاذ جمال عادل</h4>
-                            <p>يشرف على تطوير المناهج والبرامج التعليمية بالجامعة.</p>
-                        </div>
+                        <h4>رئيس قسم التعليم: الأستاذ جمال عادل</h4>
+                        <p>يشرف على تطوير المناهج والبرامج التعليمية بالجامعة. خبير في تصميم البرامج الدراسية.</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- معلومات الجامعة -->
-    <section class="university-info" id="university">
+    <!-- مميزات الجامعة -->
+    <section class="features" id="features">
         <div class="container">
-            <h2 class="section-title">مميزات جامعة تعالى بالليل</h2>
-            <div class="university-cards">
-                <div class="info-card">
-                    <i class="fas fa-moon"></i>
+            <div class="section-header">
+                <h2 class="section-title">مميزات جامعة تعالى بالليل</h2>
+                <p class="section-subtitle">نقدم لطلابنا بيئة تعليمية استثنائية تلبي احتياجات العصر الحديث</p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-moon"></i>
+                    </div>
                     <h3>التعليم الليلي</h3>
                     <p>نظام تعليمي مرن يناسب العاملين والراغبين في استكمال دراستهم في الفترة المسائية.</p>
                 </div>
                 
-                <div class="info-card">
-                    <i class="fas fa-graduation-cap"></i>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
                     <h3>برامج أكاديمية متنوعة</h3>
-                    <p>نقدم مجموعة واسعة من البرامج الأكاديمية في مختلف التخصصات الحديثة.</p>
+                    <p>نقدم مجموعة واسعة من البرامج الأكاديمية في مختلف التخصصات الحديثة والمطلوبة.</p>
                 </div>
                 
-                <div class="info-card">
-                    <i class="fas fa-users"></i>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
                     <h3>هيئة تدريس متميزة</h3>
                     <p>نخبة من الأساتذة الجامعيين ذوي الخبرة والكفاءة في مجال التعليم العالي.</p>
                 </div>
@@ -557,22 +904,26 @@
     </section>
 
     <!-- معرض الصور -->
-    <section class="gallery" id="gallery">
+    <section class="gallery-section" id="gallery">
         <div class="container">
-            <h2 class="section-title">معرض الصور</h2>
+            <div class="section-header">
+                <h2 class="section-title">معرض الصور</h2>
+                <p class="section-subtitle">لقطات من حياة الجامعة وأنشطتها المتميزة</p>
+            </div>
+            
             <div class="gallery-grid">
                 <div class="gallery-item">
-                    <img src="https://via.placeholder.com/400x250/1a237e/ffffff?text=جمال+عادل" alt="جمال عادل">
+                    <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="gallery-img" alt="جمال عادل">
                     <div class="gallery-caption">جمال عادل - رئيس قسم التعليم</div>
                 </div>
                 
                 <div class="gallery-item">
-                    <img src="https://via.placeholder.com/400x250/ff9800/ffffff?text=المدخل+الرئيسي" alt="المدخل الرئيسي">
+                    <img src="https://images.unsplash.com/photo-1562774053-701939374585?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="gallery-img" alt="المدخل الرئيسي">
                     <div class="gallery-caption">المدخل الرئيسي للجامعة</div>
                 </div>
                 
                 <div class="gallery-item">
-                    <img src="https://via.placeholder.com/400x250/4caf50/ffffff?text=الدكتور+ميسو" alt="الدكتور ميسو">
+                    <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="gallery-img" alt="الدكتور ميسو">
                     <div class="gallery-caption">الدكتور ميسو - رئيس الجامعة</div>
                 </div>
             </div>
@@ -583,34 +934,29 @@
     <footer id="contact">
         <div class="container">
             <div class="footer-content">
-                <div class="footer-section">
+                <div class="footer-logo">
                     <h3>جامعة تعالى بالليل</h3>
-                    <p>منصة التعليم الليلي الرائدة في المنطقة، نؤمن بأن التعليم حق للجميع في أي وقت.</p>
-                    <div class="social-links">
-                        <a href="https://www.facebook.com/unclemiso1" target="_blank"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-youtube"></i></a>
-                    </div>
+                    <p>منصة التعليم الليلي الرائدة في المنطقة، نؤمن بأن التعليم حق للجميع في أي وقت. نحن نعمل على توفير تعليم عالي الجودة في الوقت المناسب للجميع.</p>
                 </div>
                 
-                <div class="footer-section">
-                    <h3>روابط سريعة</h3>
+                <div class="footer-links">
+                    <h4>روابط سريعة</h4>
                     <ul>
-                        <li><a href="#home">الرئيسية</a></li>
-                        <li><a href="#president">رئيس الجامعة</a></li>
-                        <li><a href="#university">عن الجامعة</a></li>
-                        <li><a href="#gallery">معرض الصور</a></li>
+                        <li><a href="#home"><i class="fas fa-chevron-left"></i> الرئيسية</a></li>
+                        <li><a href="#president"><i class="fas fa-chevron-left"></i> رئيس الجامعة</a></li>
+                        <li><a href="#team"><i class="fas fa-chevron-left"></i> فريق القيادة</a></li>
+                        <li><a href="#features"><i class="fas fa-chevron-left"></i> مميزات الجامعة</a></li>
+                        <li><a href="#gallery"><i class="fas fa-chevron-left"></i> معرض الصور</a></li>
                     </ul>
                 </div>
                 
-                <div class="footer-section">
-                    <h3>اتصل بنا</h3>
+                <div class="footer-links">
+                    <h4>اتصل بنا</h4>
                     <ul>
-                        <li><i class="fas fa-map-marker-alt"></i> العنوان: جامعة تعالى بالليل، المدينة التعليمية</li>
-                        <li><i class="fas fa-phone"></i> الهاتف: +123 456 7890</li>
-                        <li><i class="fas fa-envelope"></i> البريد: info@taala-blel.edu</li>
-                        <li><i class="fas fa-clock"></i> ساعات العمل: 6:00 مساءً - 10:00 مساءً</li>
+                        <li><a href="#"><i class="fas fa-map-marker-alt"></i> جامعة تعالى بالليل، المدينة التعليمية</a></li>
+                        <li><a href="tel:+1234567890"><i class="fas fa-phone"></i> +123 456 7890</a></li>
+                        <li><a href="mailto:info@taala-blel.edu"><i class="fas fa-envelope"></i> info@taala-blel.edu</a></li>
+                        <li><a href="#"><i class="fas fa-clock"></i> ساعات العمل: 6:00 مساءً - 10:00 مساءً</a></li>
                     </ul>
                 </div>
             </div>
@@ -625,12 +971,16 @@
         // تفعيل القائمة المتنقلة
         document.getElementById('mobile-menu-btn').addEventListener('click', function() {
             document.getElementById('nav-menu').classList.toggle('active');
+            this.innerHTML = document.getElementById('nav-menu').classList.contains('active') 
+                ? '<i class="fas fa-times"></i>' 
+                : '<i class="fas fa-bars"></i>';
         });
         
         // إغلاق القائمة عند النقر على رابط
         document.querySelectorAll('#nav-menu a').forEach(link => {
             link.addEventListener('click', () => {
                 document.getElementById('nav-menu').classList.remove('active');
+                document.getElementById('mobile-menu-btn').innerHTML = '<i class="fas fa-bars"></i>';
             });
         });
         
@@ -645,39 +995,55 @@
                 const targetElement = document.querySelector(targetId);
                 if(targetElement) {
                     window.scrollTo({
-                        top: targetElement.offsetTop - 80,
+                        top: targetElement.offsetTop - 100,
                         behavior: 'smooth'
                     });
                 }
             });
         });
         
-        // تغيير الصور عند توفرها
-        document.addEventListener('DOMContentLoaded', function() {
-            // هذه وظيفة لاستبدال الصور النائبة بالصور الحقيقية عند توفرها
-            // في حالتك، الصور ستكون باسم 1.jpg و 2.jpg و 3.jpg
-            const images = [
-                { id: 'logo-img', url: '1.jpg' },
-                { id: 'president-img', url: '3.jpg' }
-            ];
+        // تأثيرات عند التمرير
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if(window.scrollY > 50) {
+                header.style.boxShadow = '0 10px 30px rgba(0, 0, 0, 0.2)';
+                header.style.padding = '0';
+            } else {
+                header.style.boxShadow = '0 5px 25px rgba(0, 0, 0, 0.15)';
+            }
             
-            // محاكاة تحميل الصور (في المشروع الحقيقي، استبدل المسارات)
-            images.forEach(img => {
-                const element = document.getElementById(img.id);
-                // في المشروع الحقيقي، استخدم:
-                // element.src = 'images/' + img.url;
-                console.log(`سيتم تحميل الصورة: ${img.url} للعنصر: ${img.id}`);
+            // تأثيرات ظهور العناصر
+            const elements = document.querySelectorAll('.president-card, .team-member, .feature-card, .gallery-item');
+            elements.forEach(element => {
+                const position = element.getBoundingClientRect();
+                if(position.top < window.innerHeight - 100) {
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                }
             });
         });
         
-        // إضافة تأثير عند التمرير
-        window.addEventListener('scroll', function() {
-            const header = document.querySelector('header');
-            if(window.scrollY > 100) {
-                header.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.2)';
-            } else {
-                header.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.1)';
-            }
+        // تهيئة العنومات لعرضها تدريجياً
+        document.addEventListener('DOMContentLoaded', function() {
+            const elements = document.querySelectorAll('.president-card, .team-member, .feature-card, .gallery-item');
+            elements.forEach(element => {
+                element.style.opacity = '0';
+                element.style.transform = 'translateY(30px)';
+                element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            });
+            
+            // تشغيل التأثير بعد تحميل الصفحة
+            setTimeout(() => {
+                window.dispatchEvent(new Event('scroll'));
+            }, 300);
+            
+            // إضافة تأثير للشعار
+            const logoText = document.querySelector('.logo-text h1');
+            setInterval(() => {
+                logoText.style.background = `linear-gradient(to right, ${Math.random() > 0.5 ? '#F1C40F' : '#E74C3C'}, #fff)`;
+                logoText.style.webkitBackgroundClip = 'text';
+                logoText.style.webkitTextFillColor = 'transparent';
+            }, 3000);
         });
     </script>
 </body>
