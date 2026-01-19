@@ -3,243 +3,289 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>بوابة جامعة تعالى بالليل</title>
+    <title>جامعة تعالى بالليل | النظام الأكاديمي</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #0f172a;
-            --gold: #fbbf24;
-            --red: #e11d48;
-            --white: #ffffff;
-            --glass: rgba(255, 255, 255, 0.1);
+            --primary-dark: #020617;
+            --secondary-dark: #0f172a;
+            --accent-gold: #fbbf24;
+            --error-red: #ef4444;
+            --text-white: #f8fafc;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Cairo', sans-serif; }
-        body { background-color: #020617; color: var(--white); overflow-x: hidden; }
+        body { background-color: var(--primary-dark); color: var(--text-white); overflow-x: hidden; }
 
-        /* --- شاشات التحكم --- */
-        .page-screen { min-height: 100vh; display: none; padding: 20px; transition: 0.5s; }
-        .active-screen { display: flex; flex-direction: column; align-items: center; justify-content: center; }
+        /* --- نظام التنقل بين الصفحات --- */
+        .page-wrapper { display: none; min-height: 100vh; width: 100%; }
+        .active-page { display: block; animation: fadeIn 0.8s ease; }
 
-        /* --- صفحة التسجيل --- */
-        #reg-screen { background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.8)), url('3.jpg') center/cover; }
-        .form-container {
-            background: rgba(15, 23, 42, 0.9); padding: 40px; border-radius: 20px;
-            width: 100%; max-width: 500px; border: 1px solid var(--gold); box-shadow: 0 0 30px rgba(251, 191, 36, 0.2);
+        /* --- 1. صفحة التسجيل --- */
+        #registration-page {
+            background: linear-gradient(rgba(2, 6, 23, 0.8), rgba(2, 6, 23, 0.8)), url('3.jpg') center/cover;
+            display: flex; align-items: center; justify-content: center;
         }
+        .form-box {
+            background: var(--secondary-dark); padding: 40px; border-radius: 20px;
+            border: 2px solid var(--accent-gold); width: 100%; max-width: 450px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        }
+        .form-box h2 { text-align: center; margin-bottom: 30px; color: var(--accent-gold); font-size: 1.8rem; }
         .input-group { margin-bottom: 20px; }
-        .input-group label { display: block; margin-bottom: 10px; color: var(--gold); }
-        .input-group input, .input-group select {
-            width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #334155;
-            background: #1e293b; color: white; outline: none;
+        .input-group label { display: block; margin-bottom: 8px; font-size: 0.9rem; color: #94a3b8; }
+        .input-group input {
+            width: 100%; padding: 12px; border-radius: 10px; border: 1px solid #334155;
+            background: #1e293b; color: white; outline: none; transition: 0.3s;
         }
-        .btn-submit {
-            width: 100%; padding: 15px; background: var(--gold); color: var(--primary);
-            border: none; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 1.1rem;
+        .input-group input:focus { border-color: var(--accent-gold); }
+        .submit-btn {
+            width: 100%; padding: 15px; background: var(--accent-gold); color: #000;
+            border: none; border-radius: 10px; font-weight: 900; cursor: pointer; font-size: 1.1rem;
         }
 
-        /* --- صفحة الرفض --- */
-        #reject-screen { background: #000; text-align: center; }
-        .reject-msg { color: var(--red); font-size: 2.5rem; font-weight: 900; margin-bottom: 20px; }
-        .reject-sub { font-size: 1.5rem; color: #fff; }
+        /* --- 2. صفحة الرفض --- */
+        #reject-page { text-align: center; background: #000; padding-top: 15vh; }
+        .reject-icon { font-size: 6rem; color: var(--error-red); margin-bottom: 20px; }
+        .reject-title { font-size: 3rem; color: var(--error-red); margin-bottom: 10px; }
+        .reject-msg { font-size: 2rem; color: #fff; }
 
-        /* --- صفحة القبول (البطاقة) --- */
-        #success-screen { background: radial-gradient(circle, #1e293b, #020617); }
+        /* --- 3. صفحة القبول (الكارنيه) --- */
+        #success-page { background: #020617; text-align: center; padding-top: 10vh; }
         .id-card {
             background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-            width: 350px; padding: 25px; border-radius: 15px; border: 2px solid var(--gold);
-            position: relative; margin-bottom: 30px; text-align: right;
+            width: 380px; margin: 30px auto; padding: 25px; border-radius: 20px;
+            border: 2px solid var(--accent-gold); position: relative; text-align: right;
+            box-shadow: 0 0 40px rgba(251, 191, 36, 0.1);
         }
-        .id-card img { width: 100px; height: 120px; border-radius: 8px; border: 1px solid var(--gold); object-fit: cover; }
+        .id-card-header { border-bottom: 1px solid rgba(251, 191, 36, 0.2); padding-bottom: 10px; margin-bottom: 15px; }
+        .id-content { display: flex; gap: 20px; align-items: center; }
+        .id-photo { width: 110px; height: 130px; border-radius: 10px; object-fit: cover; border: 1px solid var(--accent-gold); }
 
-        /* --- الموقع الرسمي (التصميم الذي أعجبك) --- */
+        /* --- 4. الموقع الرسمي (المنظم) --- */
         header {
-            width: 100%; background: rgba(15, 23, 42, 0.95); padding: 15px 5%;
+            background: rgba(15, 23, 42, 0.9); backdrop-filter: blur(10px);
+            padding: 15px 5%; border-bottom: 2px solid var(--accent-gold);
             display: flex; justify-content: space-between; align-items: center;
-            border-bottom: 2px solid var(--gold); sticky; top: 0; z-index: 100;
+            position: sticky; top: 0; z-index: 1000;
         }
-        .hero {
-            width: 100%; height: 70vh; background: linear-gradient(rgba(0,0,0,0.5), #020617), url('3.jpg') center/cover;
-            display: flex; align-items: center; justify-content: center; text-align: center;
+        .hero-section {
+            height: 60vh; background: linear-gradient(rgba(0,0,0,0.6), #020617), url('3.jpg') center/cover;
+            display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;
         }
-        .section-title { font-size: 2.5rem; margin: 50px 0; color: var(--gold); text-align: center; }
-        
-        .admin-section { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; padding: 0 5%; max-width: 1200px; }
-        .card { background: #0f172a; border-radius: 15px; overflow: hidden; border: 1px solid var(--glass); text-align: center; }
-        .card img { width: 100%; height: 350px; object-fit: cover; }
-        .card-body { padding: 20px; }
+        .section-container { max-width: 1200px; margin: auto; padding: 60px 20px; }
+        .section-title { text-align: center; font-size: 2.5rem; color: var(--accent-gold); margin-bottom: 50px; position: relative; }
+        .section-title::after { content: ''; display: block; width: 80px; height: 4px; background: var(--accent-gold); margin: 10px auto; }
 
-        .gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; padding: 20px 5%; }
-        .gallery img { width: 100%; height: 200px; object-fit: cover; border-radius: 10px; transition: 0.3s; }
-        .gallery img:hover { transform: scale(1.05); border: 2px solid var(--gold); }
-
-        /* --- الإشعار --- */
-        #notification {
-            position: fixed; top: -100px; left: 50%; transform: translateX(-50%);
-            background: var(--gold); color: #000; padding: 15px 30px;
-            border-radius: 50px; font-weight: bold; z-index: 1000; transition: 0.5s;
+        /* تعريف الشخصيات */
+        .leaders-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 40px; }
+        .leader-profile {
+            background: var(--secondary-dark); border-radius: 20px; overflow: hidden;
+            display: flex; border: 1px solid rgba(255,255,255,0.05); transition: 0.4s;
         }
-        #notification.show { top: 20px; }
+        .leader-profile:hover { transform: translateY(-10px); border-color: var(--accent-gold); }
+        .leader-img { width: 180px; object-fit: cover; }
+        .leader-info { padding: 30px; }
+        .leader-info h3 { color: var(--accent-gold); margin-bottom: 5px; font-size: 1.5rem; }
+        .leader-info span { color: #94a3b8; font-size: 0.9rem; font-weight: bold; }
+        .leader-info p { margin-top: 15px; font-size: 0.95rem; line-height: 1.6; color: #cbd5e1; }
 
-        /* أنيميشن */
+        /* المعرض */
+        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+        .gallery-item { border-radius: 15px; overflow: hidden; height: 250px; border: 2px solid transparent; transition: 0.3s; }
+        .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
+        .gallery-item:hover img { transform: scale(1.1); }
+        .gallery-item:hover { border-color: var(--accent-gold); }
+
+        /* الإشعار */
+        #anthem-toast {
+            position: fixed; bottom: -100px; left: 20px; background: var(--accent-gold);
+            color: #000; padding: 15px 25px; border-radius: 10px; font-weight: bold;
+            display: flex; align-items: center; gap: 10px; transition: 0.5s; z-index: 2000;
+        }
+        #anthem-toast.show { bottom: 20px; }
+
         @keyframes fadeIn { from {opacity: 0;} to {opacity: 1;} }
+
+        @media (max-width: 768px) {
+            .leader-profile { flex-direction: column; }
+            .leader-img { width: 100%; height: 250px; }
+            .id-card { width: 90%; }
+        }
     </style>
 </head>
 <body>
 
-    <section id="reg-screen" class="page-screen active-screen">
-        <div class="form-container">
-            <h2 style="text-align: center; margin-bottom: 30px; color: var(--gold);">بوابة التقديم الإلكتروني</h2>
-            <form id="enrollForm">
+    <div id="registration-page" class="page-wrapper active-page">
+        <div class="form-box">
+            <h2>بوابة التقديم الإلكتروني</h2>
+            <form id="enrollmentForm">
                 <div class="input-group">
-                    <label>الاسم الكامل</label>
-                    <input type="text" id="stdName" required placeholder="أدخل اسمك كما في الشهادة">
+                    <label>الاسم الرباعي</label>
+                    <input type="text" id="stdName" required placeholder="أدخل اسمك الكامل">
                 </div>
                 <div class="input-group">
-                    <label>مجموع الثانوية العامة (%)</label>
-                    <input type="number" id="stdGrade" required placeholder="مثال: 75">
+                    <label>النسبة المئوية (%)</label>
+                    <input type="number" id="stdGrade" required placeholder="مثال: 85">
                 </div>
                 <div class="input-group">
-                    <label>صورة شخصية</label>
+                    <label>الصورة الشخصية</label>
                     <input type="file" id="stdPhoto" accept="image/*" required>
                 </div>
-                <button type="submit" class="btn-submit">تقديم الطلب</button>
+                <button type="submit" class="submit-btn">إرسال طلب الالتحاق</button>
             </form>
         </div>
-    </section>
+    </div>
 
-    <section id="reject-screen" class="page-screen">
-        <i class="fas fa-times-circle" style="font-size: 5rem; color: var(--red); margin-bottom: 20px;"></i>
-        <h1 class="reject-msg">للأسف تم رفض طلبك!</h1>
-        <p class="reject-sub">مجموعك أقل من 50%.. <span style="color: var(--gold);">ابقا تعلا بليل</span></p>
-        <button onclick="location.reload()" style="margin-top: 30px; background: none; border: 1px solid #fff; color: #fff; padding: 10px 20px; cursor: pointer;">محاولة مرة أخرى</button>
-    </section>
+    <div id="reject-page" class="page-wrapper">
+        <div class="reject-icon"><i class="fas fa-user-slash"></i></div>
+        <h1 class="reject-title">تم رفض طلبك!</h1>
+        <p class="reject-msg">مجموعك أقل من 50%.. <br><span style="color: var(--accent-gold);">ابقا تعلا بليل</span></p>
+        <button onclick="location.reload()" style="margin-top:40px; background: none; border: 1px solid #fff; color: #fff; padding: 10px 25px; cursor: pointer;">العودة للمحاولة</button>
+    </div>
 
-    <section id="success-screen" class="page-screen">
-        <h1 style="color: #4ade80; margin-bottom: 20px;">🎉 مبروك! تم قبولك في الجامعة</h1>
+    <div id="success-page" class="page-wrapper">
+        <h1 style="color: #4ade80;">تهانينا! تم قبولك رسمياً</h1>
         <div class="id-card">
-            <div style="display: flex; gap: 20px; align-items: center;">
-                <img id="idPreviewImg" src="" alt="Student Photo">
-                <div>
-                    <h3 id="idNameDisplay">--</h3>
-                    <p style="color: var(--gold);">طالب مستجد - 2026</p>
-                    <p id="idGradeDisplay">المجموع: --</p>
+            <div class="id-card-header">
+                <h3 style="margin: 0;">جامعة تعالى بالليل</h3>
+                <small style="color: var(--accent-gold);">بطاقة تعريف الطالب</small>
+            </div>
+            <div class="id-content">
+                <img id="idPhotoPreview" src="" class="id-photo">
+                <div class="id-details">
+                    <p style="color: var(--accent-gold); font-size: 0.8rem;">الاسم:</p>
+                    <h3 id="idNameDisplay" style="margin-bottom: 10px;">---</h3>
+                    <p style="color: var(--accent-gold); font-size: 0.8rem;">رقم القيد:</p>
+                    <h3>TBU-2026-001</h3>
                 </div>
             </div>
-            <div style="margin-top: 15px; border-top: 1px solid var(--glass); padding-top: 10px; font-size: 0.8rem;">
-                الكلية: كلية الدراسات الليلية المتطورة
-            </div>
+            <div style="margin-top: 15px; font-size: 0.7rem; opacity: 0.5;">* صالحة للدخول من صرح العلم</div>
         </div>
-        <button class="btn-submit" style="width: 350px;" onclick="enterMainSite()">دخول الموقع الرسمي للجامعة</button>
-    </section>
+        <button class="submit-btn" style="width: 380px;" onclick="enterOfficialSite()">دخول صرح العلم</button>
+    </div>
 
-    <main id="main-site" style="display: none;">
-        <div id="notification">🎵 هذا نشيد جامعة تعالى بالليل</div>
-        <audio id="anthem" loop src="1.mp3"></audio>
+    <div id="official-site" class="page-wrapper">
+        <audio id="anthem-audio" loop src="1.mp3"></audio>
+        <div id="anthem-toast"><i class="fas fa-music"></i> 🎵 هذا نشيد جامعة تعالى بالليل</div>
 
         <header>
-            <div style="display: flex; align-items: center; gap: 10px;">
-                <img src="1.jpg" style="width: 50px; border-radius: 50%;">
-                <h3>جامعة تعالى بالليل</h3>
+            <div style="display: flex; align-items: center; gap: 12px;">
+                <img src="1.jpg" style="width: 50px; border-radius: 50%; border: 1px solid var(--accent-gold);">
+                <h2 style="font-size: 1.2rem;">جامعة تعالى بالليل</h2>
             </div>
-            <i class="fas fa-volume-up" id="muteIcon" onclick="toggleAudio()" style="cursor:pointer; color: var(--gold);"></i>
+            <nav>
+                <i class="fas fa-volume-up" id="muteBtn" onclick="toggleMusic()" style="cursor: pointer; color: var(--accent-gold); font-size: 1.3rem;"></i>
+            </nav>
         </header>
 
-        <section class="hero">
-            <div>
-                <h1 style="font-size: 4rem;">مرحباً بك في <span style="color: var(--gold);">حرمنا الجامعي</span></h1>
-                <p>هنا نصنع المستقبل تحت ضوء القمر</p>
-            </div>
+        <section class="hero-section">
+            <h1 style="font-size: 3.5rem; margin-bottom: 10px;">مرحباً بكم في <span style="color: var(--accent-gold);">صرح العلم</span></h1>
+            <p style="font-size: 1.2rem; opacity: 0.8;">البيت الأكاديمي للطامحين والساهرين</p>
         </section>
 
-        <h2 class="section-title">إدارة الجامعة</h2>
-        <section class="admin-section">
-            <div class="card">
-                <img src="5.jpg" alt="President">
-                <div class="card-body">
-                    <h3>الدكتور ميسو</h3>
-                    <p style="color: var(--gold);">رئيس الجامعة</p>
+        <section class="section-container">
+            <h2 class="section-title">مجلس إدارة الجامعة</h2>
+            <div class="leaders-grid">
+                <div class="leader-profile">
+                    <img src="5.jpg" class="leader-img">
+                    <div class="leader-info">
+                        <h3>الدكتور ميسو (عم ميسو)</h3>
+                        <span>رئيس مجلس إدارة الجامعة</span>
+                        <p>صاحب الرؤية الأولى لتأسيس صرح "تعالى بالليل". يعمل على تطوير المنظومة التعليمية بما يتناسب مع متطلبات المستقبل وسوق العمل الليلي المتقدم.</p>
+                    </div>
+                </div>
+                <div class="leader-profile">
+                    <img src="4.jpg" class="leader-img">
+                    <div class="leader-info">
+                        <h3>الدكتور حشمت</h3>
+                        <span>نائب رئيس الجامعة للشؤون الإدارية</span>
+                        <p>المسؤول الأول عن الانضباط داخل صرح الجامعة، والمشرف العام على تنظيم الجداول الدراسية وضمان سير العملية الأكاديمية بأعلى جودة.</p>
+                    </div>
                 </div>
             </div>
-            <div class="card">
-                <img src="4.jpg" alt="Vice President">
-                <div class="card-body">
-                    <h3>الدكتور حشمت</h3>
-                    <p style="color: var(--gold);">نائب رئيس الجامعة</p>
-                </div>
+        </section>
+
+        <section class="section-container" style="background: rgba(255,255,255,0.02); border-radius: 30px;">
+            <h2 class="section-title">معرض مرافق الجامعة</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item"><img src="1.jpg"></div>
+                <div class="gallery-item"><img src="2.jpg"></div>
+                <div class="gallery-item"><img src="3.jpg"></div>
+                <div class="gallery-item"><img src="4.jpg"></div>
+                <div class="gallery-item"><img src="7.jpg"></div>
+                <div class="gallery-item"><img src="8.jpg"></div>
+                <div class="gallery-item"><img src="9.jpg"></div>
+                <div class="gallery-item"><img src="5.jpg"></div>
             </div>
         </section>
 
-        <h2 class="section-title">معرض المرافق والطلاب</h2>
-        <section class="gallery">
-            <img src="1.jpg"> <img src="2.jpg"> <img src="3.jpg">
-            <img src="7.jpg"> <img src="8.jpg"> <img src="9.jpg">
-        </section>
-
-        <footer style="padding: 50px; text-align: center; background: #000; margin-top: 50px;">
-            <p>&copy; 2026 جميع الحقوق محفوظة لجامعة تعالى بالليل</p>
+        <footer style="padding: 60px; text-align: center; border-top: 1px solid rgba(255,255,255,0.05);">
+            <p>&copy; 2026 جامعة تعالى بالليل | صرح العلم والمعرفة</p>
+            <p style="font-size: 0.8rem; margin-top: 10px; color: var(--accent-gold);">تصميم وتطوير: فريق محمد زيدان</p>
         </footer>
-    </main>
+    </div>
 
     <script>
-        const enrollForm = document.getElementById('enrollForm');
-        const regScreen = document.getElementById('reg-screen');
-        const rejectScreen = document.getElementById('reject-screen');
-        const successScreen = document.getElementById('success-screen');
-        const mainSite = document.getElementById('main-site');
-        const anthem = document.getElementById('anthem');
-        const note = document.getElementById('notification');
+        const enrollmentForm = document.getElementById('enrollmentForm');
+        const regPage = document.getElementById('registration-page');
+        const rejectPage = document.getElementById('reject-page');
+        const successPage = document.getElementById('success-page');
+        const officialSite = document.getElementById('official-site');
+        const anthem = document.getElementById('anthem-audio');
+        
+        let userPhoto = "";
 
-        let studentPhotoData = "";
-
-        // التعامل مع رفع الصورة
+        // التقاط الصورة ومعالجتها
         document.getElementById('stdPhoto').addEventListener('change', function(e) {
             const reader = new FileReader();
-            reader.onload = function(event) { studentPhotoData = event.target.result; }
+            reader.onload = (event) => { userPhoto = event.target.result; };
             reader.readAsDataURL(e.target.files[0]);
         });
 
-        // تقديم الطلب
-        enrollForm.addEventListener('submit', function(e) {
+        // معالجة التقديم
+        enrollmentForm.addEventListener('submit', function(e) {
             e.preventDefault();
             const name = document.getElementById('stdName').value;
             const grade = parseFloat(document.getElementById('stdGrade').value);
 
-            regScreen.classList.remove('active-screen');
+            regPage.classList.remove('active-page');
 
             if (grade >= 50) {
-                // قبول
+                // حالة القبول
                 document.getElementById('idNameDisplay').innerText = name;
-                document.getElementById('idGradeDisplay').innerText = "المجموع: " + grade + "%";
-                document.getElementById('idPreviewImg').src = studentPhotoData;
-                successScreen.classList.add('active-screen');
+                document.getElementById('idPhotoPreview').src = userPhoto;
+                successPage.classList.add('active-page');
             } else {
-                // رفض
-                rejectScreen.classList.add('active-screen');
+                // حالة الرفض
+                rejectPage.classList.add('active-page');
             }
         });
 
         // دخول الموقع الرسمي
-        function enterMainSite() {
-            successScreen.classList.remove('active-screen');
-            mainSite.style.display = 'block';
-            window.scrollTo(0, 0);
+        function enterOfficialSite() {
+            successPage.classList.remove('active-page');
+            officialSite.classList.add('active-page');
             
             // تشغيل النشيد والإشعار
             anthem.play();
-            note.classList.add('show');
-            setTimeout(() => note.classList.remove('show'), 5000);
+            const toast = document.getElementById('anthem-toast');
+            setTimeout(() => {
+                toast.classList.add('show');
+                setTimeout(() => toast.classList.remove('show'), 5000);
+            }, 1000);
         }
 
-        function toggleAudio() {
-            const icon = document.getElementById('muteIcon');
-            if(anthem.paused) {
+        // تحكم الصوت
+        function toggleMusic() {
+            const btn = document.getElementById('muteBtn');
+            if (anthem.paused) {
                 anthem.play();
-                icon.className = "fas fa-volume-up";
+                btn.className = "fas fa-volume-up";
             } else {
                 anthem.pause();
-                icon.className = "fas fa-volume-mute";
+                btn.className = "fas fa-volume-mute";
             }
         }
     </script>
