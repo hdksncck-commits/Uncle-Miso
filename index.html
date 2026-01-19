@@ -3,276 +3,244 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>جامعة تعالى بالليل | بوابة القبول والتسجيل</title>
+    <title>بوابة جامعة تعالى بالليل</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
-    
     <style>
         :root {
-            --primary: #0f172a;    /* كحلي ملكي */
-            --accent: #fbbf24;     /* ذهبي */
-            --secondary: #e11d48;  /* أحمر أكاديمي */
-            --bg-light: #f8fafc;
+            --primary: #0f172a;
+            --gold: #fbbf24;
+            --red: #e11d48;
             --white: #ffffff;
+            --glass: rgba(255, 255, 255, 0.1);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Cairo', sans-serif; }
-        body { background-color: var(--bg-light); color: var(--primary); overflow-x: hidden; }
+        body { background-color: #020617; color: var(--white); overflow-x: hidden; }
 
-        /* --- شاشة الدخول (The Gate) --- */
-        #welcome-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.95)), url('3.jpg') center/cover;
-            display: flex; flex-direction: column; justify-content: center; align-items: center;
-            z-index: 9999; color: white; transition: 0.8s ease-in-out;
-        }
-        .welcome-btn {
-            padding: 15px 40px; font-size: 1.2rem; background: var(--accent);
-            color: var(--primary); border: none; border-radius: 50px;
-            cursor: pointer; font-weight: bold; box-shadow: 0 10px 20px rgba(0,0,0,0.3);
-            transition: 0.3s; margin-top: 20px;
-        }
-        .welcome-btn:hover { transform: scale(1.05); background: white; }
+        /* --- شاشات التحكم --- */
+        .page-screen { min-height: 100vh; display: none; padding: 20px; transition: 0.5s; }
+        .active-screen { display: flex; flex-direction: column; align-items: center; justify-content: center; }
 
-        /* --- الإشعارات --- */
-        #anthem-note {
-            position: fixed; top: -100px; left: 50%; transform: translateX(-50%);
-            background: var(--primary); color: var(--accent); padding: 15px 30px;
-            border-radius: 12px; border-bottom: 3px solid var(--accent);
-            z-index: 10000; transition: 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            font-weight: bold; box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-        }
-        #anthem-note.active { top: 20px; }
-
-        /* --- الهيدر --- */
-        header {
-            background: var(--white); padding: 15px 0; position: sticky; top: 0;
-            z-index: 100; box-shadow: 0 2px 15px rgba(0,0,0,0.1);
-        }
-        .nav-container { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: auto; padding: 0 20px; }
-        .logo-box { display: flex; align-items: center; gap: 15px; }
-        .logo-box img { width: 60px; height: 60px; border-radius: 50%; border: 2px solid var(--accent); }
-
-        /* --- القسم الرئيسي (Hero) --- */
-        .hero {
-            height: 60vh; background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('3.jpg') center/cover;
-            display: flex; align-items: center; justify-content: center; color: white; text-align: center;
-        }
-        .hero h1 { font-size: 3.5rem; text-shadow: 2px 2px 10px rgba(0,0,0,0.5); }
-
-        /* --- نظام التسجيل (الجديد) --- */
-        .registration-area { max-width: 1000px; margin: -50px auto 50px; padding: 0 20px; position: relative; z-index: 10; }
-        .form-card {
-            background: white; padding: 40px; border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1); display: grid; grid-template-columns: 1fr 1fr; gap: 30px;
+        /* --- صفحة التسجيل --- */
+        #reg-screen { background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.8)), url('3.jpg') center/cover; }
+        .form-container {
+            background: rgba(15, 23, 42, 0.9); padding: 40px; border-radius: 20px;
+            width: 100%; max-width: 500px; border: 1px solid var(--gold); box-shadow: 0 0 30px rgba(251, 191, 36, 0.2);
         }
         .input-group { margin-bottom: 20px; }
-        .input-group label { display: block; margin-bottom: 8px; font-weight: bold; color: var(--primary); }
+        .input-group label { display: block; margin-bottom: 10px; color: var(--gold); }
         .input-group input, .input-group select {
-            width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; outline: none;
+            width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #334155;
+            background: #1e293b; color: white; outline: none;
         }
-        .submit-btn {
-            width: 100%; padding: 15px; background: var(--secondary); color: white;
-            border: none; border-radius: 8px; font-weight: bold; cursor: pointer; transition: 0.3s;
+        .btn-submit {
+            width: 100%; padding: 15px; background: var(--gold); color: var(--primary);
+            border: none; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 1.1rem;
         }
-        .submit-btn:hover { background: var(--primary); }
 
-        /* --- الكارنيه الجامعي --- */
-        #student-id-result {
-            background: #1e293b; color: white; border-radius: 15px; padding: 20px;
-            display: none; border-right: 8px solid var(--accent);
-        }
-        .id-photo { width: 100px; height: 120px; background: #334155; border-radius: 8px; object-fit: cover; }
+        /* --- صفحة الرفض --- */
+        #reject-screen { background: #000; text-align: center; }
+        .reject-msg { color: var(--red); font-size: 2.5rem; font-weight: 900; margin-bottom: 20px; }
+        .reject-sub { font-size: 1.5rem; color: #fff; }
 
-        /* --- قسم القيادة --- */
-        .management-section { max-width: 1200px; margin: 50px auto; padding: 0 20px; }
-        .admin-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
-        .admin-card {
-            background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            text-align: center; border-bottom: 4px solid var(--accent); transition: 0.3s;
+        /* --- صفحة القبول (البطاقة) --- */
+        #success-screen { background: radial-gradient(circle, #1e293b, #020617); }
+        .id-card {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            width: 350px; padding: 25px; border-radius: 15px; border: 2px solid var(--gold);
+            position: relative; margin-bottom: 30px; text-align: right;
         }
-        .admin-card:hover { transform: translateY(-10px); }
-        .admin-card img { width: 100%; height: 350px; object-fit: cover; }
-        .admin-info { padding: 20px; }
+        .id-card img { width: 100px; height: 120px; border-radius: 8px; border: 1px solid var(--gold); object-fit: cover; }
 
-        /* --- المعرض --- */
-        .gallery-grid {
-            display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 15px; padding: 20px;
+        /* --- الموقع الرسمي (التصميم الذي أعجبك) --- */
+        header {
+            width: 100%; background: rgba(15, 23, 42, 0.95); padding: 15px 5%;
+            display: flex; justify-content: space-between; align-items: center;
+            border-bottom: 2px solid var(--gold); sticky; top: 0; z-index: 100;
         }
-        .gallery-item { height: 200px; border-radius: 10px; overflow: hidden; position: relative; }
-        .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
-        .gallery-item:hover img { transform: scale(1.1); }
+        .hero {
+            width: 100%; height: 70vh; background: linear-gradient(rgba(0,0,0,0.5), #020617), url('3.jpg') center/cover;
+            display: flex; align-items: center; justify-content: center; text-align: center;
+        }
+        .section-title { font-size: 2.5rem; margin: 50px 0; color: var(--gold); text-align: center; }
+        
+        .admin-section { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; padding: 0 5%; max-width: 1200px; }
+        .card { background: #0f172a; border-radius: 15px; overflow: hidden; border: 1px solid var(--glass); text-align: center; }
+        .card img { width: 100%; height: 350px; object-fit: cover; }
+        .card-body { padding: 20px; }
 
-        @media (max-width: 768px) {
-            .form-card { grid-template-columns: 1fr; }
-            .hero h1 { font-size: 2rem; }
+        .gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; padding: 20px 5%; }
+        .gallery img { width: 100%; height: 200px; object-fit: cover; border-radius: 10px; transition: 0.3s; }
+        .gallery img:hover { transform: scale(1.05); border: 2px solid var(--gold); }
+
+        /* --- الإشعار --- */
+        #notification {
+            position: fixed; top: -100px; left: 50%; transform: translateX(-50%);
+            background: var(--gold); color: #000; padding: 15px 30px;
+            border-radius: 50px; font-weight: bold; z-index: 1000; transition: 0.5s;
         }
+        #notification.show { top: 20px; }
+
+        /* أنيميشن */
+        @keyframes fadeIn { from {opacity: 0;} to {opacity: 1;} }
     </style>
 </head>
 <body>
 
-    <div id="anthem-note">🎵 هذا نشيد جامعة تعالى بالليل</div>
+    <section id="reg-screen" class="page-screen active-screen">
+        <div class="form-container">
+            <h2 style="text-align: center; margin-bottom: 30px; color: var(--gold);">بوابة التقديم الإلكتروني</h2>
+            <form id="enrollForm">
+                <div class="input-group">
+                    <label>الاسم الكامل</label>
+                    <input type="text" id="stdName" required placeholder="أدخل اسمك كما في الشهادة">
+                </div>
+                <div class="input-group">
+                    <label>مجموع الثانوية العامة (%)</label>
+                    <input type="number" id="stdGrade" required placeholder="مثال: 75">
+                </div>
+                <div class="input-group">
+                    <label>صورة شخصية</label>
+                    <input type="file" id="stdPhoto" accept="image/*" required>
+                </div>
+                <button type="submit" class="btn-submit">تقديم الطلب</button>
+            </form>
+        </div>
+    </section>
 
-    <div id="welcome-overlay">
-        <img src="1.jpg" style="width: 120px; border-radius: 50%; border: 4px solid var(--accent); margin-bottom: 20px;">
-        <h2>أهلاً بكم في جامعة تعالى بالليل</h2>
-        <p>بوابة المستقبل الأكاديمي المشرق</p>
-        <button class="welcome-btn" onclick="startExperience()">دخول الحرم الجامعي</button>
-    </div>
+    <section id="reject-screen" class="page-screen">
+        <i class="fas fa-times-circle" style="font-size: 5rem; color: var(--red); margin-bottom: 20px;"></i>
+        <h1 class="reject-msg">للأسف تم رفض طلبك!</h1>
+        <p class="reject-sub">مجموعك أقل من 50%.. <span style="color: var(--gold);">ابقا تعلا بليل</span></p>
+        <button onclick="location.reload()" style="margin-top: 30px; background: none; border: 1px solid #fff; color: #fff; padding: 10px 20px; cursor: pointer;">محاولة مرة أخرى</button>
+    </section>
 
-    <audio id="anthem-audio" loop>
-        <source src="1.mp3" type="audio/mpeg">
-    </audio>
-
-    <header>
-        <div class="nav-container">
-            <div class="logo-box">
-                <img src="1.jpg" alt="Logo">
+    <section id="success-screen" class="page-screen">
+        <h1 style="color: #4ade80; margin-bottom: 20px;">🎉 مبروك! تم قبولك في الجامعة</h1>
+        <div class="id-card">
+            <div style="display: flex; gap: 20px; align-items: center;">
+                <img id="idPreviewImg" src="" alt="Student Photo">
                 <div>
-                    <h3 style="margin:0">جامعة تعالى بالليل</h3>
-                    <small style="color: var(--secondary)">التميز .. في الوقت المناسب</small>
+                    <h3 id="idNameDisplay">--</h3>
+                    <p style="color: var(--gold);">طالب مستجد - 2026</p>
+                    <p id="idGradeDisplay">المجموع: --</p>
                 </div>
             </div>
-            <nav>
-                <a href="#register" class="welcome-btn" style="padding: 10px 20px; font-size: 0.9rem; text-decoration: none;">سجل الآن</a>
-            </nav>
-        </div>
-    </header>
-
-    <section class="hero">
-        <div class="hero-text">
-            <h1>بوابة القبول والالتحاق الجامعي</h1>
-            <p>سنة دراسية جديدة .. طموح لا يتوقف</p>
-        </div>
-    </section>
-
-    <section class="registration-area" id="register">
-        <div class="form-card">
-            <div class="form-inputs">
-                <h3 style="margin-bottom: 20px; color: var(--secondary); border-right: 4px solid var(--accent); padding-right: 10px;">طلب التحاق طالب جديد</h3>
-                <form id="regForm" onsubmit="handleRegistration(event)">
-                    <div class="input-group">
-                        <label>الاسم الكامل</label>
-                        <input type="text" id="name" placeholder="أدخل اسمك كما في الهوية" required>
-                    </div>
-                    <div class="input-group">
-                        <label>مجموع الثانوية (%)</label>
-                        <input type="number" id="grade" step="0.1" placeholder="مثال: 98.5" required>
-                    </div>
-                    <div class="input-group">
-                        <label>الكلية المرغوبة</label>
-                        <select id="faculty">
-                            <option>كلية العلوم الليلية</option>
-                            <option>كلية هندسة النجوم</option>
-                            <option>كلية التجارة الإلكترونية</option>
-                        </select>
-                    </div>
-                    <div class="input-group">
-                        <label>الصورة الشخصية</label>
-                        <input type="file" id="photo" accept="image/*" onchange="previewFile()">
-                    </div>
-                    <button type="submit" class="submit-btn">إصدار بطاقة القبول</button>
-                </form>
-            </div>
-
-            <div id="result-side" style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
-                <div id="student-id-result">
-                    <h4 style="text-align: center; border-bottom: 1px solid #444; margin-bottom: 15px; padding-bottom: 5px;">بطاقة طالب (مقبول)</h4>
-                    <div style="display: flex; gap: 15px;">
-                        <img id="id-preview" src="1.jpg" class="id-photo">
-                        <div>
-                            <p style="font-size: 0.8rem; color: var(--accent);">الاسم:</p>
-                            <p id="res-name" style="font-weight: bold; margin-bottom: 10px;">--</p>
-                            <p style="font-size: 0.8rem; color: var(--accent);">الكلية:</p>
-                            <p id="res-faculty">--</p>
-                        </div>
-                    </div>
-                    <p style="margin-top: 15px; font-size: 0.7rem; text-align: center; opacity: 0.6;">رقم القيد: TBU-2026-X</p>
-                </div>
-                <p id="placeholder-text" style="color: #999; text-align: center;">املأ البيانات لتظهر بطاقتك الجامعية هنا</p>
+            <div style="margin-top: 15px; border-top: 1px solid var(--glass); padding-top: 10px; font-size: 0.8rem;">
+                الكلية: كلية الدراسات الليلية المتطورة
             </div>
         </div>
+        <button class="btn-submit" style="width: 350px;" onclick="enterMainSite()">دخول الموقع الرسمي للجامعة</button>
     </section>
 
-    <section class="management-section">
-        <h2 style="text-align: center; margin-bottom: 40px;">القيادة الأكاديمية العليا</h2>
-        <div class="admin-grid">
-            <div class="admin-card">
+    <main id="main-site" style="display: none;">
+        <div id="notification">🎵 هذا نشيد جامعة تعالى بالليل</div>
+        <audio id="anthem" loop src="1.mp3"></audio>
+
+        <header>
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <img src="1.jpg" style="width: 50px; border-radius: 50%;">
+                <h3>جامعة تعالى بالليل</h3>
+            </div>
+            <i class="fas fa-volume-up" id="muteIcon" onclick="toggleAudio()" style="cursor:pointer; color: var(--gold);"></i>
+        </header>
+
+        <section class="hero">
+            <div>
+                <h1 style="font-size: 4rem;">مرحباً بك في <span style="color: var(--gold);">حرمنا الجامعي</span></h1>
+                <p>هنا نصنع المستقبل تحت ضوء القمر</p>
+            </div>
+        </section>
+
+        <h2 class="section-title">إدارة الجامعة</h2>
+        <section class="admin-section">
+            <div class="card">
                 <img src="5.jpg" alt="President">
-                <div class="admin-info">
-                    <h3 style="color: var(--primary)">الدكتور ميسو (عم ميسو)</h3>
-                    <p style="color: var(--secondary); font-weight: bold;">رئيس جامعة تعالى بالليل</p>
-                    <p style="font-size: 0.9rem; margin-top: 10px;">رؤية قيادية نحو تعليم ليلي متطور ومواكب للتكنولوجيا.</p>
+                <div class="card-body">
+                    <h3>الدكتور ميسو</h3>
+                    <p style="color: var(--gold);">رئيس الجامعة</p>
                 </div>
             </div>
-            <div class="admin-card">
+            <div class="card">
                 <img src="4.jpg" alt="Vice President">
-                <div class="admin-info">
-                    <h3 style="color: var(--primary)">الدكتور حشمت</h3>
-                    <p style="color: var(--secondary); font-weight: bold;">نائب رئيس الجامعة</p>
-                    <p style="font-size: 0.9rem; margin-top: 10px;">المشرف العام على الشؤون الأكاديمية والطلابية.</p>
+                <div class="card-body">
+                    <h3>الدكتور حشمت</h3>
+                    <p style="color: var(--gold);">نائب رئيس الجامعة</p>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section style="background: white; padding: 50px 0;">
-        <h2 style="text-align: center; margin-bottom: 30px;">معرض مرافق الجامعة</h2>
-        <div class="gallery-grid">
-            <div class="gallery-item"><img src="3.jpg" alt="Campus"></div>
-            <div class="gallery-item"><img src="7.jpg" alt="Gallery 7"></div>
-            <div class="gallery-item"><img src="8.jpg" alt="Gallery 8"></div>
-            <div class="gallery-item"><img src="9.jpg" alt="Gallery 9"></div>
-        </div>
-    </section>
+        <h2 class="section-title">معرض المرافق والطلاب</h2>
+        <section class="gallery">
+            <img src="1.jpg"> <img src="2.jpg"> <img src="3.jpg">
+            <img src="7.jpg"> <img src="8.jpg"> <img src="9.jpg">
+        </section>
 
-    <footer style="background: var(--primary); color: white; padding: 40px; text-align: center;">
-        <p>جميع الحقوق محفوظة &copy; 2026 جامعة تعالى بالليل</p>
-        <p style="font-size: 0.8rem; opacity: 0.6; margin-top: 10px;">تصميم وتطوير: محمد زيدان</p>
-    </footer>
+        <footer style="padding: 50px; text-align: center; background: #000; margin-top: 50px;">
+            <p>&copy; 2026 جميع الحقوق محفوظة لجامعة تعالى بالليل</p>
+        </footer>
+    </main>
 
     <script>
-        const audio = document.getElementById('anthem-audio');
-        const note = document.getElementById('anthem-note');
+        const enrollForm = document.getElementById('enrollForm');
+        const regScreen = document.getElementById('reg-screen');
+        const rejectScreen = document.getElementById('reject-screen');
+        const successScreen = document.getElementById('success-screen');
+        const mainSite = document.getElementById('main-site');
+        const anthem = document.getElementById('anthem');
+        const note = document.getElementById('notification');
 
-        function startExperience() {
-            // إخفاء شاشة الدخول
-            document.getElementById('welcome-overlay').style.opacity = '0';
-            setTimeout(() => {
-                document.getElementById('welcome-overlay').style.display = 'none';
-            }, 800);
+        let studentPhotoData = "";
 
-            // تشغيل الصوت وإظهار الإشعار
-            audio.play();
-            setTimeout(() => {
-                note.classList.add('active');
-                setTimeout(() => note.classList.remove('active'), 5000);
-            }, 1000);
-        }
-
-        function previewFile() {
-            const preview = document.getElementById('id-preview');
-            const file = document.getElementById('photo').files[0];
+        // التعامل مع رفع الصورة
+        document.getElementById('stdPhoto').addEventListener('change', function(e) {
             const reader = new FileReader();
-            reader.onloadend = function () { preview.src = reader.result; }
-            if (file) { reader.readAsDataURL(file); }
+            reader.onload = function(event) { studentPhotoData = event.target.result; }
+            reader.readAsDataURL(e.target.files[0]);
+        });
+
+        // تقديم الطلب
+        enrollForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = document.getElementById('stdName').value;
+            const grade = parseFloat(document.getElementById('stdGrade').value);
+
+            regScreen.classList.remove('active-screen');
+
+            if (grade >= 50) {
+                // قبول
+                document.getElementById('idNameDisplay').innerText = name;
+                document.getElementById('idGradeDisplay').innerText = "المجموع: " + grade + "%";
+                document.getElementById('idPreviewImg').src = studentPhotoData;
+                successScreen.classList.add('active-screen');
+            } else {
+                // رفض
+                rejectScreen.classList.add('active-screen');
+            }
+        });
+
+        // دخول الموقع الرسمي
+        function enterMainSite() {
+            successScreen.classList.remove('active-screen');
+            mainSite.style.display = 'block';
+            window.scrollTo(0, 0);
+            
+            // تشغيل النشيد والإشعار
+            anthem.play();
+            note.classList.add('show');
+            setTimeout(() => note.classList.remove('show'), 5000);
         }
 
-        function handleRegistration(e) {
-            e.preventDefault();
-            // جلب البيانات
-            const name = document.getElementById('name').value;
-            const faculty = document.getElementById('faculty').value;
-
-            // تحديث البطاقة
-            document.getElementById('res-name').innerText = name;
-            document.getElementById('res-faculty').innerText = faculty;
-            
-            // إظهار النتائج
-            document.getElementById('student-id-result').style.display = 'block';
-            document.getElementById('placeholder-text').style.display = 'none';
-            
-            alert('تم تسجيل بياناتك بنجاح وجاري إصدار البطاقة الجامعية!');
+        function toggleAudio() {
+            const icon = document.getElementById('muteIcon');
+            if(anthem.paused) {
+                anthem.play();
+                icon.className = "fas fa-volume-up";
+            } else {
+                anthem.pause();
+                icon.className = "fas fa-volume-mute";
+            }
         }
     </script>
 </body>
