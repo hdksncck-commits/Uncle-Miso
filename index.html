@@ -3,297 +3,260 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>جامعة تعالى بالليل | Taala Blel University</title>
+    <title>جامعة تعالى بالليل | الموقع الرسمي</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@300;400;500;600;700;800&family=Rubik:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700;900&family=Noto+Sans+Arabic:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #1a252f;
-            --secondary: #e74c3c;
-            --accent: #3498db;
-            --gold: #f1c40f;
-            --light: #f8f9fa;
-            --dark: #0d1b2a;
-            --transition: all 0.3s ease-in-out;
-            --shadow: 0 10px 30px rgba(0,0,0,0.1);
+            --primary: #0f172a;
+            --secondary: #e11d48;
+            --accent: #fbbf24;
+            --text-light: #f8fafc;
+            --glass: rgba(255, 255, 255, 0.1);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Cairo', sans-serif; background-color: #020617; color: var(--text-light); overflow-x: hidden; }
 
-        body {
-            font-family: 'Noto Sans Arabic', sans-serif;
-            background-color: var(--light);
-            color: var(--primary);
-            line-height: 1.7;
+        /* شاشة الدخول لتفعيل الصوت */
+        #entry-gate {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.9)), url('3.jpg') center/cover;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            z-index: 9999; transition: 1s ease-out;
         }
+        .gate-content { text-align: center; animation: fadeIn 2s; }
+        .gate-btn {
+            margin-top: 20px; padding: 15px 40px; font-size: 1.5rem;
+            background: var(--accent); color: var(--primary); border: none;
+            border-radius: 50px; cursor: pointer; font-weight: bold;
+            box-shadow: 0 0 20px var(--accent); transition: 0.3s;
+        }
+        .gate-btn:hover { transform: scale(1.1); background: #fff; }
 
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        /* الإشعار */
+        #notification {
+            position: fixed; top: -100px; left: 50%; transform: translateX(-50%);
+            background: var(--accent); color: var(--primary); padding: 15px 30px;
+            border-radius: 10px; font-weight: bold; z-index: 10000;
+            transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        #notification.show { top: 20px; }
 
-        /* Navigation */
+        /* الهيدر */
         header {
-            background: white;
-            padding: 10px 0;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            box-shadow: var(--shadow);
+            background: rgba(15, 23, 42, 0.9); backdrop-filter: blur(10px);
+            padding: 15px 0; position: sticky; top: 0; z-index: 100;
+            border-bottom: 2px solid var(--accent);
         }
-
-        .nav-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            text-decoration: none;
-        }
-
-        .logo img {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            border: 2px solid var(--gold);
-        }
-
-        .logo h1 {
-            font-size: 1.4rem;
-            color: var(--primary);
-        }
-
-        nav ul {
-            display: flex;
-            list-style: none;
-            gap: 20px;
-        }
-
-        nav a {
-            text-decoration: none;
-            color: var(--primary);
-            font-weight: 600;
-            transition: var(--transition);
-        }
-
-        nav a:hover { color: var(--secondary); }
-
-        /* Hero Section */
-        .hero {
-            padding: 180px 0 100px;
-            background: linear-gradient(rgba(13, 27, 42, 0.8), rgba(13, 27, 42, 0.8)), 
-                        url('3.jpg') center/cover no-repeat;
-            color: white;
-            text-align: center;
-        }
-
-        .hero h2 { font-size: 3.5rem; margin-bottom: 20px; }
-        .hero span { color: var(--gold); }
-        .hero p { font-size: 1.2rem; max-width: 800px; margin: 0 auto 30px; }
-
-        .btn {
-            display: inline-block;
-            padding: 15px 35px;
-            background: var(--secondary);
-            color: white;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: bold;
-            transition: var(--transition);
-        }
-
-        .btn:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(231, 76, 60, 0.4); }
-
-        /* President Card */
-        .section-padding { padding: 80px 0; }
-        .section-title { text-align: center; margin-bottom: 50px; font-size: 2.5rem; position: relative; }
-        .section-title::after { content: ''; display: block; width: 60px; height: 4px; background: var(--secondary); margin: 10px auto; }
-
-        .president-grid {
-            display: grid;
-            grid-template-columns: 1fr 1.5fr;
-            gap: 40px;
-            background: white;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: var(--shadow);
-        }
-
-        .president-img img { width: 100%; height: 100%; object-fit: cover; }
-
-        .president-details { padding: 40px; }
-        .id-badge {
-            display: inline-block;
-            background: #eee;
-            padding: 5px 15px;
-            border-radius: 5px;
-            font-family: monospace;
-            margin: 15px 0;
-        }
-
-        /* Team Cards */
-        .team-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-
-        .team-card {
-            background: white;
-            padding: 30px;
-            border-radius: 15px;
-            text-align: center;
-            box-shadow: var(--shadow);
-            transition: var(--transition);
-        }
-
-        .team-card:hover { transform: translateY(-10px); }
+        .nav-container { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: auto; padding: 0 20px; }
+        .logo { display: flex; align-items: center; gap: 15px; text-decoration: none; color: white; }
+        .logo img { width: 60px; height: 60px; border-radius: 50%; border: 2px solid var(--accent); }
         
-        .team-card img {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            margin-bottom: 20px;
-            object-fit: cover;
-            border: 4px solid var(--accent);
+        /* البانر الرئيسي */
+        .hero {
+            height: 80vh; background: linear-gradient(to bottom, rgba(15,23,42,0.6), #020617), url('3.jpg') center/cover;
+            display: flex; align-items: center; justify-content: center; text-align: center;
         }
+        .hero h1 { font-size: 4rem; text-shadow: 0 5px 15px rgba(0,0,0,0.5); margin-bottom: 20px; }
+        .hero h1 span { color: var(--accent); }
 
-        /* Gallery */
+        /* الأقسام */
+        section { padding: 80px 20px; max-width: 1200px; margin: auto; }
+        .section-title { text-align: center; font-size: 2.5rem; margin-bottom: 50px; border-bottom: 3px solid var(--secondary); display: table; margin-left: auto; margin-right: auto; }
+
+        /* بطاقة الرئيس */
+        .president-box {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 40px;
+            background: var(--glass); padding: 40px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.1);
+        }
+        .president-box img { width: 100%; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .id-badge { background: #eee; color: #333; padding: 10px; border-radius: 5px; font-family: monospace; display: inline-block; margin-top: 15px; }
+
+        /* المعرض الجديد */
         .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;
         }
-
         .gallery-item {
-            position: relative;
-            border-radius: 10px;
-            overflow: hidden;
-            height: 250px;
+            position: relative; overflow: hidden; border-radius: 15px; height: 300px;
+            border: 2px solid rgba(255,255,255,0.05);
+        }
+        .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
+        .gallery-item:hover img { transform: scale(1.1) rotate(2deg); }
+        .gallery-item .overlay {
+            position: absolute; bottom: 0; background: rgba(0,0,0,0.7);
+            width: 100%; padding: 15px; text-align: center;
         }
 
-        .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: var(--transition); }
-        .gallery-item:hover img { transform: scale(1.1); }
+        /* الفوتر */
+        footer { background: #000; padding: 40px; text-align: center; border-top: 1px solid var(--glass); }
 
-        .gallery-overlay {
-            position: absolute;
-            bottom: 0;
-            width: 100%;
-            background: rgba(0,0,0,0.7);
-            color: white;
-            padding: 10px;
-            text-align: center;
-        }
-
-        footer { background: var(--dark); color: white; padding: 40px 0; text-align: center; }
+        @keyframes fadeIn { from {opacity: 0;} to {opacity: 1;} }
 
         @media (max-width: 768px) {
-            .president-grid { grid-template-columns: 1fr; }
-            nav ul { display: none; }
-            .hero h2 { font-size: 2.2rem; }
+            .hero h1 { font-size: 2.5rem; }
+            .president-box { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
 
+    <div id="notification">🎵 هذا نشيد جامعة تعالى بالليل</div>
+
+    <div id="entry-gate">
+        <div class="gate-content">
+            <img src="1.jpg" style="width: 150px; border-radius: 50%; border: 5px solid var(--accent); margin-bottom: 20px;">
+            <h1>مرحباً بكم في صرح العلم</h1>
+            <p>اضغط للدخول إلى جامعة تعالى بالليل</p>
+            <button class="gate-btn" onclick="enterUniversity()">دخول الحرم الجامعي</button>
+        </div>
+    </div>
+
+    <audio id="university-anthem" loop>
+        <source src="1.mp3" type="audio/mpeg">
+    </audio>
+
     <header>
-        <div class="container nav-content">
+        <div class="nav-container">
             <a href="#" class="logo">
-                <img src="1.jpg" alt="شعار الجامعة">
-                <h1>جامعة تعالى بالليل</h1>
+                <img src="1.jpg" alt="Logo">
+                <h2>تعالى بالليل</h2>
             </a>
             <nav>
-                <ul>
-                    <li><a href="#home">الرئيسية</a></li>
-                    <li><a href="#president">رئيس الجامعة</a></li>
-                    <li><a href="#team">القيادة</a></li>
-                    <li><a href="#gallery">المعرض</a></li>
-                </ul>
+                <i class="fas fa-volume-up" id="mute-toggle" style="cursor: pointer; color: var(--accent); font-size: 1.5rem;"></i>
             </nav>
         </div>
     </header>
 
-    <section class="hero" id="home">
-        <div class="container">
-            <h2>جامعة <span>تعالى بالليل</span></h2>
-            <p>المنصة الرسمية الرائدة للتعليم الليلي والبحث العلمي تحت إدارة الدكتور ميسو. مستقبلك يبدأ عندما تغيب الشمس.</p>
-            <a href="#president" class="btn">ابدأ رحلتك الآن</a>
+    <section class="hero">
+        <div class="hero-content">
+            <h1>جامعة <span>تعالى بالليل</span></h1>
+            <p>حيث يبدأ الطموح عندما ينام الآخرون</p>
         </div>
     </section>
 
-    <section class="section-padding" id="president">
-        <div class="container">
-            <h2 class="section-title">رئاسة الجامعة</h2>
-            <div class="president-grid">
-                <div class="president-img">
-                    <img src="5.jpg" alt="الدكتور ميسو">
-                </div>
-                <div class="president-details">
-                    <h2 style="color: var(--secondary)">الدكتور ميسو</h2>
-                    <p><strong>رئيس الجامعة ومؤسس منظومة تعالى بالليل</strong></p>
-                    <div class="id-badge">ID NO: 590.2 K</div>
-                    <p>قائد تربوي بخبرة تزيد عن 15 عاماً في تطوير المناهج التعليمية المبتكرة. يسعى الدكتور ميسو من خلال هذه الجامعة لتوفير فرصة تعليمية حقيقية لكل من يطمح للتميز في أوقات غير تقليدية.</p>
-                    <div style="margin-top: 20px;">
-                        <a href="https://www.facebook.com/unclemiso1" style="color: #1877f2; font-size: 1.5rem; margin-left: 15px;"><i class="fab fa-facebook"></i></a>
-                        <a href="https://www.tiktok.com/@uncle.miso" style="color: #000; font-size: 1.5rem;"><i class="fab fa-tiktok"></i></a>
-                    </div>
-                </div>
+    <section id="president">
+        <h2 class="section-title">كلمة رئيس الجامعة</h2>
+        <div class="president-box">
+            <div class="image">
+                <img src="5.jpg" alt="Dr Miso">
+            </div>
+            <div class="text">
+                <h3>الدكتور ميسو (عم ميسو)</h3>
+                <p>نحن هنا لنصنع المستقبل تحت أضواء النجوم. جامعتنا ليست مجرد مكان للتعلم، بل هي بيت لكل الطامحين.</p>
+                <div class="id-badge">ID NO: 590.2 K</div>
+                <br><br>
+                <img src="2.jpg" style="width: 200px; border-radius: 10px;" alt="ID Card">
             </div>
         </div>
     </section>
 
-    <section class="section-padding" id="team" style="background: #eee;">
-        <div class="container">
-            <h2 class="section-title">فريق القيادة</h2>
-            <div class="team-grid">
-                <div class="team-card">
-                    <img src="6.jpg" alt="الدكتور حشمت">
-                    <h3>الدكتور حشمت</h3>
-                    <p style="color: var(--secondary); font-weight: bold;">نائب رئيس الجامعة</p>
-                    <p>المشرف العام على الشؤون الأكاديمية وضمان جودة التعليم الليلي.</p>
-                </div>
-                </div>
+    <section id="vice">
+        <h2 class="section-title">نائب رئيس الجامعة</h2>
+        <div class="president-box">
+            <div class="text">
+                <h3>الدكتور حشمت</h3>
+                <p>المسؤول الأول عن الانضباط والسعادة الأكاديمية داخل الحرم الجامعي.</p>
+                <ul style="list-style: none; margin-top: 20px;">
+                    <li><i class="fas fa-check-circle" style="color: var(--accent);"></i> رئيس قسم التعليم الموازي</li>
+                    <li><i class="fas fa-check-circle" style="color: var(--accent);"></i> المشرف العام على القاعة الرئيسية</li>
+                </ul>
+            </div>
+            <div class="image">
+                <img src="4.jpg" alt="Dr Heshamt">
+            </div>
         </div>
     </section>
 
-    <section class="section-padding" id="gallery">
-        <div class="container">
-            <h2 class="section-title">معرض الجامعة</h2>
-            <div class="gallery-grid">
-                <div class="gallery-item">
-                    <img src="3.jpg" alt="مبنى الجامعة">
-                    <div class="gallery-overlay">المقر الرئيسي ليلاً</div>
-                </div>
-                <div class="gallery-item">
-                    <img src="2.jpg" alt="هوية الدكتور ميسو">
-                    <div class="gallery-overlay">بطاقة الاعتماد الرسمية</div>
-                </div>
-                <div class="gallery-item">
-                    <img src="1.jpg" alt="شعار الجامعة">
-                    <div class="gallery-overlay">شعار جامعة تعالى بالليل</div>
-                </div>
+    <section id="gallery">
+        <h2 class="section-title">معرض الصور الجامعي</h2>
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <img src="3.jpg" alt="Campus">
+                <div class="overlay">بوابة الجامعة ليلاً</div>
+            </div>
+            <div class="gallery-item">
+                <img src="1.jpg" alt="Logo">
+                <div class="overlay">شعارنا الرسمي</div>
+            </div>
+            <div class="gallery-item">
+                <img src="7.jpg" alt="New Image 7">
+                <div class="overlay">القاعة الكبرى</div>
+            </div>
+            <div class="gallery-item">
+                <img src="8.jpg" alt="New Image 8">
+                <div class="overlay">مكتبة الجامعة</div>
+            </div>
+            <div class="gallery-item">
+                <img src="9.jpg" alt="New Image 9">
+                <div class="overlay">ساحة الطلاب</div>
+            </div>
+            <div class="gallery-item">
+                <img src="5.jpg" alt="Dr Miso">
+                <div class="overlay">رئيس الجامعة</div>
             </div>
         </div>
     </section>
 
     <footer>
-        <div class="container">
-            <p>جميع الحقوق محفوظة &copy; 2026 لجامعة تعالى بالليل</p>
-            <p style="font-size: 0.8rem; opacity: 0.7; margin-top: 10px;">تصميم وتطوير: محمد زيدان</p>
-        </div>
+        <p>جميع الحقوق محفوظة &copy; 2026 جامعة تعالى بالليل</p>
+        <p style="font-size: 0.8rem; margin-top: 10px; color: var(--accent);">تصميم وتطوير: محمد زيدان</p>
     </footer>
 
     <script>
-        // Smooth Scroll
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
+        const audio = document.getElementById('university-anthem');
+        const notification = document.getElementById('notification');
+        const muteToggle = document.getElementById('mute-toggle');
+
+        function enterUniversity() {
+            // إخفاء شاشة الدخول
+            document.getElementById('entry-gate').style.opacity = '0';
+            setTimeout(() => {
+                document.getElementById('entry-gate').style.display = 'none';
+            }, 1000);
+
+            // تشغيل النشيد
+            audio.play().catch(e => console.log("الصوت يحتاج تفاعل"));
+
+            // إظهار الإشعار
+            setTimeout(() => {
+                notification.classList.add('show');
+                setTimeout(() => {
+                    notification.classList.remove('show');
+                }, 4000);
+            }, 1500);
+        }
+
+        // كتم وتفعيل الصوت
+        muteToggle.addEventListener('click', () => {
+            if (audio.paused) {
+                audio.play();
+                muteToggle.className = 'fas fa-volume-up';
+            } else {
+                audio.pause();
+                muteToggle.className = 'fas fa-volume-mute';
+            }
+        });
+
+        // تأثيرات الظهور عند التمرير
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section');
+            sections.forEach(sec => {
+                const top = window.scrollY;
+                const offset = sec.offsetTop - 400;
+                if (top >= offset) {
+                    sec.style.opacity = '1';
+                    sec.style.transform = 'translateY(0)';
+                }
             });
+        });
+
+        // إعدادات أولية للتحريك
+        document.querySelectorAll('section').forEach(s => {
+            s.style.opacity = '0';
+            s.style.transform = 'translateY(50px)';
+            s.style.transition = '1s all ease';
         });
     </script>
 </body>
